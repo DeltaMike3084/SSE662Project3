@@ -2,9 +2,6 @@ package Project3;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import org.junit.jupiter.api.Test;
 
 import Project3.Recipes.MenuTypes;
@@ -22,26 +19,33 @@ class DesignPatternsTest
 		Seasoning eggs = new Salt(new Pepper(new Eggs()));
 		Seasoning bacon = new Salt(new Bacon());
 		
-		assert(all.Description().equals("Beef with paprika, garlic, cayenne pepper, pepper, salt,"));
-		assert(chicken.Description().equals("Chicken with pepper, salt,"));
-		assert(fish.Description().equals("Fish with paprika,"));
-		assert(chickpeas.Description().equals("Chickpeas with salt,"));
-		assert(paneer.Description().equals("Paneer with pepper,"));
-		assert(eggs.Description().equals("Eggs with pepper, salt,"));
-		assert(bacon.Description().equals("Bacon with salt,"));
+		assertEquals(all.Description(), ("Beef with paprika, garlic, cayenne pepper, pepper, salt"));
+		assertEquals(chicken.Description(), ("Chicken with pepper, salt"));
+		assertEquals(fish.Description(), ("Fish with paprika"));
+		assertEquals(chickpeas.Description(), ("Chickpeas with salt"));
+		assertEquals(paneer.Description(), ("Paneer with pepper"));
+		assertEquals(eggs.Description(), ("Eggs with pepper, salt"));
+		assertEquals(bacon.Description(), ("Bacon with salt"));
+		assertEquals(("Beef"), (new Beef()).Description());
+		assertEquals(("Chicken"), (new Chicken()).Description());
+		assertEquals(("Fish"), (new Fish()).Description());
+		assertEquals(("Chickpeas"), (new Chickpeas()).Description());
+		assertEquals(("Paneer"), (new Paneer()).Description());
+		assertEquals(("Eggs"), (new Eggs()).Description());
+		assertEquals(("Bacon"), (new Bacon()).Description());
 	}
 	
 	@Test
 	void FacadeTest()
 	{
 		Recipe recipe = new Recipe();
-		assert(recipe.BasicChicken().Description().equals("Chicken with pepper, salt,"));
-		assert(recipe.SpicyBeef().Description().equals("Beef with cayenne pepper, paprika, pepper, salt,"));
-		assert(recipe.BasicFish().Description().equals("Fish with paprika, pepper, salt,"));
-		assert(recipe.SpicyChickpeas().Description().equals("Chickpeas with cayenne pepper, garlic, pepper, salt,"));
-		assert(recipe.SpicyPaneer().Description().equals("Paneer with cayenne pepper, garlic, pepper, salt,"));
-		assert(recipe.BasicBacon().Description().equals("Bacon with salt,"));
-		assert(recipe.BasicEggs().Description().equals("Eggs with salt, pepper,"));
+		assert(recipe.BasicChicken().Description().equals("Chicken with pepper, salt"));
+		assert(recipe.SpicyBeef().Description().equals("Beef with cayenne pepper, paprika, pepper, salt"));
+		assert(recipe.BasicFish().Description().equals("Fish with paprika, pepper, salt"));
+		assert(recipe.SpicyChickpeas().Description().equals("Chickpeas with cayenne pepper, garlic, pepper, salt"));
+		assert(recipe.SpicyPaneer().Description().equals("Paneer with cayenne pepper, garlic, pepper, salt"));
+		assert(recipe.BasicBacon().Description().equals("Bacon with salt"));
+		assert(recipe.BasicEggs().Description().equals("Eggs with salt, pepper"));
 		
 	}
 	

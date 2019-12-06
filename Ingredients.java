@@ -10,7 +10,7 @@ class Chicken implements Ingredients
 	@Override
 	public String Description()
 	{
-		return "Chicken with";
+		return "Chicken";
 	}
 }
 
@@ -19,7 +19,7 @@ class Beef implements Ingredients
 	@Override
 	public String Description()
 	{
-		return "Beef with";
+		return "Beef";
 	}
 }
 
@@ -28,7 +28,7 @@ class Fish implements Ingredients
 	@Override
 	public String Description()
 	{
-		return "Fish with";
+		return "Fish";
 	}
 }
 
@@ -37,7 +37,7 @@ class Bacon implements Ingredients
 	@Override
 	public String Description()
 	{
-		return "Bacon with";
+		return "Bacon";
 	}
 }
 
@@ -46,7 +46,7 @@ class Paneer implements Ingredients
 	@Override
 	public String Description()
 	{
-		return "Paneer with";
+		return "Paneer";
 	}
 }
 
@@ -55,7 +55,7 @@ class Chickpeas implements Ingredients
 	@Override
 	public String Description()
 	{
-		return "Chickpeas with";
+		return "Chickpeas";
 	}
 }
 
@@ -64,37 +64,52 @@ class Eggs implements Ingredients
 	@Override
 	public String Description()
 	{
-		return "Eggs with";
+		return "Eggs";
 	}
 }
 
 abstract class Seasoning implements Ingredients
 {
 	Ingredients recipe;
+	protected String description = "";
 	
 	public Seasoning(Ingredients recipe)
 	{
 		this.recipe = recipe;
+		setDescription();
 	}
 	
 	@Override
 	public String Description()
 	{
-		return recipe.Description();
+		return recipe.Description() + formatDescription() + this.description;
 	}
+
+	abstract void setDescription();
+
+	private String formatDescription() {
+		String contextFormat = "";
+
+		if (recipe.getClass().getSuperclass() != this.getClass().getSuperclass())
+			contextFormat = " with ";
+		else
+			contextFormat = ", ";
+
+		return contextFormat;
+	}
+
 }
 
 class Cayenne extends Seasoning
 {
-	public Cayenne(Ingredients recipe)
-	{
+
+	public Cayenne(Ingredients recipe) {
 		super(recipe);
 	}
-	
+
 	@Override
-	public String Description()
-	{
-		return super.Description() + " cayenne pepper,";
+	void setDescription() {
+		this.description = "cayenne pepper";
 	}
 }
 
@@ -104,11 +119,10 @@ class Salt extends Seasoning
 	{
 		super(recipe);
 	}
-	
+
 	@Override
-	public String Description()
-	{
-		return super.Description() + " salt,";
+	void setDescription() {
+		this.description = "salt";
 	}
 }
 
@@ -118,11 +132,10 @@ class Pepper extends Seasoning
 	{
 		super(recipe);
 	}
-	
+
 	@Override
-	public String Description()
-	{
-		return super.Description() + " pepper,";
+	void setDescription() {
+		this.description = "pepper";
 	}
 }
 
@@ -132,11 +145,10 @@ class Garlic extends Seasoning
 	{
 		super(recipe);
 	}
-	
+
 	@Override
-	public String Description()
-	{
-		return super.Description() + " garlic,";
+	void setDescription() {
+		this.description = "garlic";
 	}
 }
 
@@ -146,10 +158,9 @@ class Paprika extends Seasoning
 	{
 		super(recipe);
 	}
-	
+
 	@Override
-	public String Description()
-	{
-		return super.Description() + " paprika,";
+	void setDescription() {
+		this.description = "paprika";
 	}
 }
