@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import Project3.Recipes.MenuTypes;
 
+import java.time.*;
+
 class DesignPatternsTest
 {
 	@Test
@@ -62,6 +64,46 @@ class DesignPatternsTest
 				assertNotNull(i.Description());
 			}
 		}
+
+		System.out.println(LocalTime.now());
+		Menu dinerMenu = new DinerMenu();
+		dinerMenu.displayMenu();
+		// Test concrete Creator class implementing the Factory Method design pattern
+		Clock testClock;
+		// Test DinerMenu for breakfast
+		String expectedBreakfastMenu = "Breakfast Menu\n" +
+				"--------------------------------------------------------------------------------\n" +
+				"1: Bacon with salt\n" +
+				"--------------------------------------------------------------------------------\n" +
+				"2: Eggs with salt, pepper";
+		testClock = Clock.fixed(
+				Instant.from(
+						LocalDateTime.of(2019, 12, 7, 8, 30, 0)
+								.atZone(ZoneId.systemDefault())
+								.toInstant()),
+				ZoneId.systemDefault());
+		DinerMenu testBreakfastMenu = new DinerMenu(testClock);
+		assertEquals(expectedBreakfastMenu, testBreakfastMenu.displayMenu());
+
+		// Test DinerMenu for normal menu
+		String expectedNormalMenu = "Menu\n" +
+				"--------------------------------------------------------------------------------\n" +
+				"1: Chicken with pepper, salt\n" +
+				"--------------------------------------------------------------------------------\n" +
+				"2: Fish with paprika, pepper, salt\n" +
+				"--------------------------------------------------------------------------------\n" +
+				"3: Beef with cayenne pepper, paprika, pepper, salt";
+		testClock = Clock.fixed(
+				Instant.from(
+						LocalDateTime.of(2019, 12, 7, 12, 30, 0)
+								.atZone(ZoneId.systemDefault())
+								.toInstant()),
+				ZoneId.systemDefault());
+		DinerMenu testNormalMenu = new DinerMenu(testClock);
+		assertEquals(expectedNormalMenu, testNormalMenu.displayMenu());
+
+
+
 	}
 	
 	@Test
